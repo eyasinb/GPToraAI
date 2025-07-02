@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - GPToraAI</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-form">
+            <div class="form-header">
+                <svg width="60" height="60" viewBox="0 0 200 200" class="nav-logo">
+                    <defs>
+                        <linearGradient id="authLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00aa55;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M50,50 L150,50 L150,150 L50,150 Z" fill="none" stroke="url(#authLogoGradient)" stroke-width="8"/>
+                    <path d="M70,70 L130,70 L130,130 L70,130 Z" fill="none" stroke="url(#authLogoGradient)" stroke-width="6"/>
+                    <path d="M90,90 L110,90 L110,110 L90,110 Z" fill="url(#authLogoGradient)"/>
+                </svg>
+                <h2>Login to GPToraAI</h2>
+            </div>
+            
+            <form onsubmit="event.preventDefault(); login();">
+                <div class="form-group">
+                    <label for="loginEmail">Email (@gmail.com)</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="your.email@gmail.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="auth-button">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+                
+                <button type="button" class="auth-button google-button" onclick="signInWithGoogle()">
+                    <i class="fab fa-google"></i>
+                    Sign in with Google
+                </button>
+            </form>
+            
+            <div class="auth-links">
+                <a href="signup.html">Don't have an account? Sign Up</a>
+                <br><br>
+                <a href="reset-password.html">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
