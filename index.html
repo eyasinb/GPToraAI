@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPToraAI - Advanced AI Chat Platform</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="logo-container">
+            <div class="logo-animation">
+                <svg width="120" height="120" viewBox="0 0 200 200" class="animated-logo">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#00cc6a;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00aa55;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Animated Logo Paths -->
+                    <path class="logo-path path-1" d="M50,50 L150,50 L150,150 L50,150 Z" fill="none" stroke="url(#logoGradient)" stroke-width="8"/>
+                    <path class="logo-path path-2" d="M70,70 L130,70 L130,130 L70,130 Z" fill="none" stroke="url(#logoGradient)" stroke-width="6"/>
+                    <path class="logo-path path-3" d="M90,90 L110,90 L110,110 L90,110 Z" fill="url(#logoGradient)"/>
+                    <circle class="logo-pulse" cx="100" cy="100" r="80" fill="none" stroke="url(#logoGradient)" stroke-width="2" opacity="0.3"/>
+                </svg>
+            </div>
+            <h1 class="logo-text">GPToraAI</h1>
+            <div class="loading-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="main-content" style="display: none;">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <svg width="40" height="40" viewBox="0 0 200 200" class="nav-logo">
+                    <defs>
+                        <linearGradient id="navLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00aa55;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M50,50 L150,50 L150,150 L50,150 Z" fill="none" stroke="url(#navLogoGradient)" stroke-width="8"/>
+                    <path d="M70,70 L130,70 L130,130 L70,130 Z" fill="none" stroke="url(#navLogoGradient)" stroke-width="6"/>
+                    <path d="M90,90 L110,90 L110,110 L90,110 Z" fill="url(#navLogoGradient)"/>
+                </svg>
+                <span class="brand-text">GPToraAI</span>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to GPToraAI</h1>
+                <p class="hero-subtitle">Advanced AI Chat Platform with GPT-4, DALL·E 2, and More</p>
+                <div class="hero-features">
+                    <div class="feature-tag">GPT-3.5 AI</div>
+                    <div class="feature-tag">DALL·E 2</div>
+                    <div class="feature-tag">GPT-4.1</div>
+                    <div class="feature-tag">GPT-4o-mini</div>
+                </div>
+                <button class="cta-button" onclick="checkAuthAndRedirect()">
+                    <i class="fas fa-rocket"></i>
+                    Get Started
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
