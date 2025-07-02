@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Telegram Channel - GPToraAI</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="telegram-join-container">
+        <div class="join-content">
+            <div class="telegram-logo">
+                <i class="fab fa-telegram-plane"></i>
+            </div>
+            
+            <h1 class="join-title">টেলিগ্রাম চ্যানেলে জয়েন করুন</h1>
+            <p class="join-description">
+                GPToraAI ব্যবহার করার জন্য আপনাকে আমাদের টেলিগ্রাম চ্যানেলে জয়েন করতে হবে। 
+                এটি বাধ্যতামূলক এবং একবার জয়েন করলেই যথেষ্ট।
+            </p>
+            
+            <div class="join-steps">
+                <div class="step">
+                    <div class="step-number">১</div>
+                    <div class="step-text">নিচের "টেলিগ্রাম চ্যানেলে জয়েন করুন" বাটনে ক্লিক করুন</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">২</div>
+                    <div class="step-text">টেলিগ্রাম চ্যানেলে জয়েন করুন</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">৩</div>
+                    <div class="step-text">ফিরে এসে "Continue" বাটনে ক্লিক করুন</div>
+                </div>
+            </div>
+            
+            <div class="join-buttons">
+                <a href="https://t.me/GPToraAI" target="_blank" class="telegram-join-btn" id="telegramJoinBtn">
+                    <i class="fab fa-telegram-plane"></i>
+                    টেলিগ্রাম চ্যানেলে জয়েন করুন
+                </a>
+                
+                <button class="continue-btn disabled" id="continueBtn" onclick="checkJoinAndContinue()" disabled>
+                    <i class="fas fa-arrow-right"></i>
+                    Continue to GPToraAI
+                </button>
+            </div>
+            
+            <div class="join-status" id="joinStatus">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>প্রথমে টেলিগ্রাম চ্যানেলে জয়েন করুন</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let hasJoined = localStorage.getItem('telegramJoined') === 'true';
+        let joinClicked = false;
+
+        // Check if already joined
+        if (hasJoined) {
+            window.location.href = 'login.html';
+        }
+
+        // Track when user clicks telegram join button
+        document.getElementById('telegramJoinBtn').addEventListener('click', function() {
+            joinClicked = true;
+            this.classList.add('clicked');
+            
+            // Wait 3 seconds then enable continue button
+            setTimeout(() => {
+                const continueBtn = document.getElementById('continueBtn');
+                const joinStatus = document.getElementById('joinStatus');
+                
+                continueBtn.disabled = false;
+                continueBtn.classList.remove('disabled');
+                continueBtn.classList.add('enabled');
+                
+                joinStatus.innerHTML = '<i class="fas fa-check-circle"></i><span>এখন Continue বাটনে ক্লিক করুন</span>';
+                joinStatus.classList.add('success');
+            }, 3000);
+        });
+
+        function checkJoinAndContinue() {
+            if (!joinClicked) {
+                alert('প্রথমে টেলিগ্রাম চ্যানেলে জয়েন করুন!');
+                return;
+            }
+            
+            // Mark as joined
+            localStorage.setItem('telegramJoined', 'true');
+            
+            // Show success message
+            const joinStatus = document.getElementById('joinStatus');
+            joinStatus.innerHTML = '<i class="fas fa-check-circle"></i><span>ধন্যবাদ! আপনি সফলভাবে জয়েন করেছেন</span>';
+            joinStatus.classList.add('success');
+            
+            // Redirect to login page
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+        }
+
+        // Prevent going back
+        window.history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', function() {
+            window.history.pushState(null, null, window.location.href);
+        });
+    </script>
+</body>
+</html>
