@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - GPToraAI</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <svg width="40" height="40" viewBox="0 0 200 200" class="nav-logo">
+                        <defs>
+                            <linearGradient id="chatLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00aa55;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M50,50 L150,50 L150,150 L50,150 Z" fill="none" stroke="url(#chatLogoGradient)" stroke-width="8"/>
+                        <path d="M70,70 L130,70 L130,130 L70,130 Z" fill="none" stroke="url(#chatLogoGradient)" stroke-width="6"/>
+                        <path d="M90,90 L110,90 L110,110 L90,110 Z" fill="url(#chatLogoGradient)"/>
+                    </svg>
+                    <div class="header-info">
+                        <h2>GPToraAI</h2>
+                        <p class="ai-status">
+                            <span class="status-dot"></span>
+                            OpenAI • GPT-3.5 • DALL·E 2 • Online
+                        </p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="menu-btn" onclick="toggleSidePanel()">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Side Panel -->
+        <div class="side-panel" id="sidePanel">
+            <div class="side-panel-header">
+                <h3>GPToraAI মেনু</h3>
+                <button class="close-panel-btn" onclick="closeSidePanel()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="side-panel-content">
+                <div class="menu-section">
+                    <h4>চ্যাট অপশন</h4>
+                    <button class="menu-item" onclick="newChat()">
+                        <i class="fas fa-plus"></i>
+                        নতুন চ্যাট
+                    </button>
+                    <button class="menu-item" onclick="showChatHistory()">
+                        <i class="fas fa-history"></i>
+                        চ্যাট হিস্টরি
+                    </button>
+                    <button class="menu-item" onclick="clearChat()">
+                        <i class="fas fa-trash"></i>
+                        চ্যাট ক্লিয়ার করুন
+                    </button>
+                </div>
+                <div class="menu-section">
+                    <h4>AI টুলস</h4>
+                    <button class="menu-item" onclick="addQuickMessage('একটি সুন্দর লোগো তৈরি করুন')">
+                        <i class="fas fa-image"></i>
+                        লোগো তৈরি করুন
+                    </button>
+                    <button class="menu-item" onclick="addQuickMessage('একটি ছবি তৈরি করুন')">
+                        <i class="fas fa-paint-brush"></i>
+                        ছবি তৈরি করুন
+                    </button>
+                    <button class="menu-item" onclick="addQuickMessage('কোড লিখে দিন')">
+                        <i class="fas fa-code"></i>
+                        কোড সাহায্য
+                    </button>
+                </div>
+                <div class="menu-section">
+                    <h4>অ্যাকাউন্ট</h4>
+                    <button class="menu-item" onclick="showUserInfo()">
+                        <i class="fas fa-user"></i>
+                        প্রোফাইল
+                    </button>
+                    <button class="menu-item" onclick="showUsageStats()">
+                        <i class="fas fa-chart-bar"></i>
+                        ব্যবহারের পরিসংখ্যান
+                    </button>
+                    <button class="menu-item logout-menu" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        লগআউট
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat History Panel -->
+        <div class="chat-history-panel" id="chatHistoryPanel">
+            <div class="history-header">
+                <h3>চ্যাট হিস্টরি</h3>
+                <button class="close-history-btn" onclick="closeChatHistory()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="history-content" id="historyContent">
+                <!-- Chat history will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chatMessages">
+        </div>
+
+        <!-- Chat Input -->
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                <textarea 
+                    id="chatInput" 
+                    class="chat-input" 
+                    placeholder="Type your message here... (Press Enter to send, Shift+Enter for new line)"
+                    onkeypress="handleChatKeyPress(event)"
+                    rows="1"
+                ></textarea>
+                <button class="gallery-btn" title="Upload Image" onclick="openGallery()">
+                    <i class="fas fa-image"></i>
+                </button>
+                <button class="send-button" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+            </div>
+            <div class="input-footer">
+                <small>Powered by OpenAI • GPT-3.5 • DALL·E 2</small>
+                <div class="usage-limits" id="usageLimits">
+                    <small id="messageLimit">মেসেজ: <span id="messageCount">0</span>/10 | ছবি: <span id="imageCount">0</span>/1 | লোগো: <span id="logoCount">0</span>/1</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    
+    <script src="script.js"></script>
+    
+    <script>
+        // Add quick message to input
+        function addQuickMessage(message) {
+            document.getElementById('chatInput').value = message;
+            document.getElementById('chatInput').focus();
+        }
+        
+        // Auto-resize textarea
+        document.getElementById('chatInput').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+    </script>
+</body>
+</html>
